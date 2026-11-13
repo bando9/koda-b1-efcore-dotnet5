@@ -54,6 +54,8 @@ public sealed class AppDbContext : DbContext
                 .HasForeignKey(p => p.CategoryId)
                 .OnDelete(DeleteBehavior.Restrict)
                 .IsRequired();
+
+            entity.HasIndex(p=>new{p.Name, p.Price}).HasDatabaseName("IDX_Name_Price");
                   
         });
     
