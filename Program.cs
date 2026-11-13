@@ -35,12 +35,14 @@ builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
 builder.Services.AddScoped<IProductRepository, EfProductRepository>();
 
 builder.Services.AddScoped<IOrderRepository, EfOrderRepository>();
+builder.Services.AddScoped<IProductQueryRepository, EfProductQueryRepository>();
 
 // Service
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<IProductImageStorage, LocalProductImageStorage>();
 builder.Services.AddScoped<IOrderService, OrderService>();
 
+builder.Services.AddScoped<IProductQueryService, ProductQueryService>();
 
 var connectionString = builder.Configuration.GetConnectionString("ecommercedb") 
     ?? throw new InvalidOperationException("ga bisa koneksi, belum konfigurasi");
@@ -69,7 +71,7 @@ if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
 
-    app.MapScalarApiReference();
+    app.MapScalarApiReference("/api");
 
     app.UseSwaggerUI(options => // UseSwaggerUI is called only in Development.
     {

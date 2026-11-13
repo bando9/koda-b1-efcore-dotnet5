@@ -4,6 +4,6 @@ public record UpdateProductRequest(
     string Name,
     decimal Price,
     int Stock,
-    long CategoryId,
+    string Category,
     string Description
 );
