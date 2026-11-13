@@ -9,16 +9,15 @@ public sealed class Product
     public string Name { get; private set;}
     public decimal Price { get; private set;}
     public int Stock { get; private set;}
-    public string Category {get;private set;}
     public string? Description { get; private set;}
     public ICollection<OrderItem> OrderItems {get; private set;} = new List<OrderItem>();
     
     // FK Category
-    public long CategoryId { get; private set;}
-    // public Category Category {get; private set;}
+    public long CategoryId { get; set;}
+    public Category Category {get; private set;}
 
 
-    public Product(string productCode, string name, decimal price, int stock,string category,string? description = null)
+    public Product(string productCode, string name, decimal price, int stock,long categoryId,string? description = null)
     {
         if (string.IsNullOrWhiteSpace(productCode) || productCode.Trim().Length > 30)
         {
@@ -41,18 +40,18 @@ public sealed class Product
         Name = name;
         Price = price;
         Stock = stock;
-        Category = category.Trim();
+        CategoryId = categoryId;
         Description = description?.Trim();
     }
 
-    public void UpdateDetail(string name,decimal price, int stock, string category,string? description)
+    public void UpdateDetail(string name,decimal price, int stock, long categoryId,string? description)
     {
-        var validated = new Product(ProductCode, name, price, stock, category, description);
+        var validated = new Product(ProductCode, name, price, stock, categoryId, description);
 
         Name = validated.Name;
         Price = validated.Price;
         Stock = validated.Stock;
-        Category=validated.Category;
+        CategoryId=validated.CategoryId;
         Description=validated.Description;
     }
 

@@ -18,9 +18,9 @@ public sealed class EfProductQueryRepository(AppDbContext db) : IProductQueryRep
             query = query.Where(p => p.ProductCode.StartsWith(keyword) || p.Name.StartsWith(keyword));
         }
 
-        if(criteria.Category is { Length: > 0} category)
+        if(criteria.CategoryId is long categoryId)
         {
-            query = query.Where(p => p.Category == category);
+            query = query.Where(p => p.CategoryId == categoryId);
         }
 
         if(criteria.MinPrice is decimal minPrice)
@@ -55,7 +55,7 @@ public sealed class EfProductQueryRepository(AppDbContext db) : IProductQueryRep
         int skip = (criteria.Page-1) * criteria.PageSize;
 
         ProductSearchItemResponse[] items = await sorted.Skip(skip).Take(criteria.PageSize).Select(p=> new ProductSearchItemResponse(
-            p.ProductCode,p.Name,p.Category,p.Price,p.Stock
+            p.ProductCode,p.Name,CategoryResponse.FromModel(p.Category),p.Price,p.Stock
         )).ToArrayAsync();
 
         long totalPages = (TotalCount / criteria.PageSize) + (TotalCount%criteria.PageSize == 0 ? 0 : 1);

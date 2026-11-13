@@ -15,7 +15,7 @@ public sealed class ProductService : IProductService
     // CREATE
     public async Task<ProductResponse?> CreateAsync(ProductRequest request, CancellationToken cancellationToken)
     {
-        var product = new Product(request.ProductCode, request.Name, request.Price, request.Stock, request.Category, request.Description);
+        var product = new Product(request.ProductCode, request.Name, request.Price, request.Stock, request.CategoryId, request.Description);
 
         var created = await _repository.TryAddAsync(product, cancellationToken);
 
@@ -54,7 +54,7 @@ public sealed class ProductService : IProductService
     // Update
     public async Task<ProductResponse?> UpdateAsync(string productCode, UpdateProductRequest request, CancellationToken cancellationToken)
     {
-        var product = new Product(productCode, request.Name, request.Price, request.Stock, request.Category,request.Description);
+        var product = new Product(productCode, request.Name, request.Price, request.Stock, request.CategoryId,request.Description);
 
         var updated = await _repository.TryUpdateAsync(product, cancellationToken);
 

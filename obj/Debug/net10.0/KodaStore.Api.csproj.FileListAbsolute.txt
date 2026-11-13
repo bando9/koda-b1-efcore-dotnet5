@@ -880,3 +880,4 @@ E:\code\koda-projects\day17-efcore-datainteg\koda-b1-efcore-dotnet5\obj\Debug\ne
 E:\code\koda-projects\day17-efcore-datainteg\koda-b1-efcore-dotnet5\obj\Debug\net10.0\KodaStor.A1563B0A.Up2Date
 E:\code\koda-projects\day17-efcore-datainteg\koda-b1-efcore-dotnet5\obj\Debug\net10.0\KodaStore.Api.genruntimeconfig.cache
 E:\code\koda-projects\day17-efcore-datainteg\koda-b1-efcore-dotnet5\obj\Debug\net10.0\ref\KodaStore.Api.dll
+E:\code\koda-projects\day17-efcore-datainteg\koda-b1-efcore-dotnet5\obj\Debug\net10.0\KodaStore.Api.sourcelink.json

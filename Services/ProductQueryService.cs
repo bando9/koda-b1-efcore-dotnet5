@@ -23,9 +23,9 @@ public sealed class ProductQueryService(IProductQueryRepository repo) : IProduct
 
         string ? search = string.IsNullOrWhiteSpace(request.Search) ? null : request.Search.Trim();
 
-        string ? category = string.IsNullOrWhiteSpace(request.Category) ? null : request.Category.Trim();
+        // string ? category = string.IsNullOrWhiteSpace(request.CategoryId) ? null : request.Category.Trim();
 
-        if(search?.Length > 60 || category?.Length > 30)
+        if(search?.Length > 60)
         {
             throw new ArgumentException("kepanjangan querynya");
         }
@@ -45,7 +45,7 @@ public sealed class ProductQueryService(IProductQueryRepository repo) : IProduct
         };
 
         var criteria = new ProductSearchCriteria(
-            search, category, request.MinPrice,request.MaxPrice,sort,request.Page,request.PageSize
+            search, request.CategoryId, request.MinPrice,request.MaxPrice,sort,request.Page,request.PageSize
         );
 
         return _repository.SearchAsync(criteria,cancellationToken);

@@ -70,7 +70,7 @@ public sealed class EfProductRepository : IProductRepository
             product.Name,
             product.Price,
             product.Stock, 
-            product.Category,
+            product.CategoryId,
             product.Description
         );
 

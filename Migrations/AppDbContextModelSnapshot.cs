@@ -22,6 +22,27 @@ namespace KodaStore.Api.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("KodaStore.Api.Models.Category", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Name")
+                        .IsUnique();
+
+                    b.ToTable("Category");
+                });
+
             modelBuilder.Entity("KodaStore.Api.Models.Order", b =>
                 {
                     b.Property<long>("OrderId")
@@ -103,11 +124,6 @@ namespace KodaStore.Api.Migrations
                         .IsUnicode(true)
                         .HasColumnType("nvarchar(30)");
 
-                    b.Property<string>("Category")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
                     b.Property<long>("CategoryId")
                         .HasColumnType("bigint");
 
@@ -128,6 +144,8 @@ namespace KodaStore.Api.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("ProductCode");
+
+                    b.HasIndex("CategoryId");
 
                     b.ToTable("Product", "dbo", t =>
                         {
@@ -154,6 +172,22 @@ namespace KodaStore.Api.Migrations
                     b.Navigation("Order");
 
                     b.Navigation("Product");
+                });
+
+            modelBuilder.Entity("KodaStore.Api.Models.Product", b =>
+                {
+                    b.HasOne("KodaStore.Api.Models.Category", "Category")
+                        .WithMany("Products")
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Category");
+                });
+
+            modelBuilder.Entity("KodaStore.Api.Models.Category", b =>
+                {
+                    b.Navigation("Products");
                 });
 
             modelBuilder.Entity("KodaStore.Api.Models.Order", b =>

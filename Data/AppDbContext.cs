@@ -43,24 +43,17 @@ public sealed class AppDbContext : DbContext
                 .IsRequired()
                 .HasPrecision(18,2);
 
-            entity.Property(p => p.Category)
-                .HasMaxLength(100)
-                .IsRequired();
-                // .HasPrecision(18,2);
-
             entity.Property(p => p.Stock)
                 .IsRequired();
 
             entity.Property(p =>p.Description)
                 .HasMaxLength(100);
 
-            // entity.HasOne(p => p.Category)
-            //     .WithMany(c => c.Products)
-            //     .HasForeignKey(p => p.CategoryId)
-            //     .OnDelete(DeleteBehavior.Restrict)
-            //     .IsRequired();
-
-
+            entity.HasOne(p => p.Category)
+                .WithMany(c => c.Products)
+                .HasForeignKey(p => p.CategoryId)
+                .OnDelete(DeleteBehavior.Restrict)
+                .IsRequired();
                   
         });
     
@@ -132,14 +125,14 @@ public sealed class AppDbContext : DbContext
         });
     
 
-        // modelBuilder.Entity<Category>(entity =>
-        // {
-        //     entity.HasKey(c => c.Id);
+        modelBuilder.Entity<Category>(entity =>
+        {
+            entity.HasKey(c => c.Id);
 
-        //     entity.Property(c => c.Name).HasMaxLength(50).IsRequired();
+            entity.Property(c => c.Name).HasMaxLength(50).IsRequired();
 
-        //     entity.HasIndex(c=>c.Name).IsUnique();
-        // });
+            entity.HasIndex(c=>c.Name).IsUnique();
+        });
     }
 
 

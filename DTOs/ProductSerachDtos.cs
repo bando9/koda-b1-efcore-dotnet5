@@ -6,7 +6,7 @@ public sealed class ProductSearchRequest : IValidatableObject
 {
     [StringLength(60)]
     public string? Search {get; set;}
-    public string? Category {get; set;}
+    public long? CategoryId {get; set;}
     public decimal? MinPrice {get; set;}
     public decimal? MaxPrice {get; set;}
     [Required,StringLength(20)]
@@ -52,7 +52,7 @@ public sealed class ProductSearchRequest : IValidatableObject
 public sealed record ProductSearchItemResponse(
     string ProductCode,
     string Name,
-    string Category,
+    CategoryResponse Category,
     decimal Price,
     int Stock
 );

@@ -9,9 +9,9 @@ public static class ProductSeedData
     
     private static IEnumerable<Product> InitialProducts()
     {
-        yield return new Product("P001", "Keyboard Mekanik", 35000m, 20, "Elektronik");
-        yield return new Product("P002", "Mouse", 20000m, 20, "Elektronik");
-        yield return new Product("P003", "Monitor", 15000m, 20, "Elektronik");
+        yield return new Product("P001", "Keyboard Mekanik", 35000m, 20,1);
+        yield return new Product("P002", "Mouse", 20000m, 20, 1);
+        yield return new Product("P003", "Monitor", 15000m, 20, 1);
 
 
         // *500 Data seed generate

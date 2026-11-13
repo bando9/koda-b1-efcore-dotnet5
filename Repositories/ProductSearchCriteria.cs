@@ -14,7 +14,7 @@ public enum ProductSort
 
 public sealed record ProductSearchCriteria(
     string? Search,
-    string? Category,
+    long? CategoryId,
     decimal? MinPrice,
     decimal? MaxPrice,
     ProductSort Sort,

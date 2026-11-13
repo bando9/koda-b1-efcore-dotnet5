@@ -22,7 +22,7 @@ public record ProductRequest(
     string? Description,
 
     [Required]
-    string Category
+    long CategoryId
 
 
 );
